@@ -48,9 +48,11 @@ jobs:
               npm install -g pm2
             fi
 
-            # 애플리케이션 시작 또는 재시작 (설정 파일 없이 직접 실행)
+            # 실행 중인 인스턴스가 있는지 확인하고 중지
             if pm2 list | grep -q "neordinaryu-be"; then
-              pm2 restart neordinaryu-be
-            else
-              pm2 start npm --name "neordinaryu-be" -- start
+              pm2 stop neordinaryu-be
+              pm2 delete neordinaryu-be
             fi
+            
+            # 애플리케이션 새로 시작
+            pm2 start npm --name "neordinaryu-be" -- start
