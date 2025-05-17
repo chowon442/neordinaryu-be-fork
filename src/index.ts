@@ -5,16 +5,12 @@ import oauthRouter from "./routes/oauth";
 import { googleStrategy } from "./auth.config";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
-import swaggerUi from 'swagger-ui-express';
-import YAML from 'yamljs';
-
 
 const app = express();
 const port = 3000;
 passport.use(googleStrategy);
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user as Express.User));
-
 
 app.use(sessionMiddleware);
 app.use(passport.initialize());
@@ -34,4 +30,3 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server is running at http://0.0.0.0:${port}`);
   console.log(`Swagger UI is available at http://0.0.0.0:${port}/docs`);
 });
-
