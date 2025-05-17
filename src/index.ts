@@ -30,8 +30,8 @@ app.get('/', (req, res) => {
 });
 app.use("/oauth2", oauthRouter);
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-  console.log(`Swagger UI is available at http://localhost:${port}/docs`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server is running at http://0.0.0.0:${port}`);
+  console.log(`Swagger UI is available at http://0.0.0.0:${port}/docs`);
 });
 
