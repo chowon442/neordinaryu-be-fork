@@ -36,7 +36,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             echo "===== 배포 시작 ====="
-            cd ~/neordinaryu-be
+            cd ~/neordinaryu-be-fork
             
             echo "Git 저장소 상태 확인"
             git status
