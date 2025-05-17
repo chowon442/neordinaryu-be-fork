@@ -16,7 +16,7 @@
     "url": "git+https://github.com/NeordinaryU/neordinaryu-be.git"
   },
   "dependencies": {
-    "@prisma/client": "^6.3.1",
+    "@prisma/client": "^6.8.2",
     "@quixo3/prisma-session-store": "^3.1.13",
     "@types/node": "^22.15.18",
     "autocannon": "^8.0.0",
@@ -62,7 +62,7 @@
     "@types/yamljs": "^0.2.34",
     "esbuild": "^0.25.0",
     "nodemon": "^3.1.9",
-    "prisma": "^6.3.1",
+    "prisma": "^6.8.2",
     "tsx": "^4.19.2",
     "typescript": "^5.8.3"
   },
