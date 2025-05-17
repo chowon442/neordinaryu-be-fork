@@ -15,7 +15,6 @@ passport.deserializeUser((user, done) => done(null, user as Express.User));
 app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
-
 // Swagger 문서 로드
 const swaggerDocument = YAML.load("./src/swagger/openapi.yaml");
 
