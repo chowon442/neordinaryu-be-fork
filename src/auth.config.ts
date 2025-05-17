@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { prisma } from "./db.config";
+import { PrismaClient } from "./generated/prisma";
 import { Profile } from "passport-google-oauth20";
 
 dotenv.config();
-
+export const prisma = new PrismaClient({ log: ["query"] });
 export const googleStrategy = new GoogleStrategy(
   {
     clientID: process.env.PASSPORT_GOOGLE_CLIENT_ID as string,
