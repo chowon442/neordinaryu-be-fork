@@ -24,7 +24,6 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
 app.use("/oauth2", oauthRouter);
 
 app.listen(port, () => {

@@ -1,7 +1,8 @@
 // routes/oauth.ts
 import { Router } from "express";
 import passport from "passport";
-
+import { getCurrentUser } from "../controllers/oauth.controller";
+import { Request, Response } from "express";
 const router = Router();
 
 // 🔐 구글 로그인 시작
@@ -18,5 +19,8 @@ router.get(
     res.redirect("/"); // 로그인 성공 시 리디렉션
   }
 );
+
+// 로그인된 사용자 정보
+router.get("/me", getCurrentUser);
 
 export default router;
