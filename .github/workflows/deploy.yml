@@ -1,0 +1,56 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ~/neordinaryu-be
+            git pull
+            npm ci
+            npx prisma generate
+            npx prisma migrate deploy
+            npm run build
+
+            # PM2가 설치되어 있지 않으면 설치
+            if ! command -v pm2 &> /dev/null; then
+              echo "PM2가 설치되어 있지 않아 설치합니다."
+              npm install -g pm2
+            fi
+
+            # 애플리케이션 시작 또는 재시작 (설정 파일 없이 직접 실행)
+            if pm2 list | grep -q "neordinaryu-be"; then
+              pm2 restart neordinaryu-be
+            else
+              pm2 start npm --name "neordinaryu-be" -- start
+            fi
